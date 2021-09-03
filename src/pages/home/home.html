@@ -8,11 +8,15 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  
+  <ion-list>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v3">docs</a> will show you the way.
-  </p>
+    <ion-item>
+      <ion-label stacked>CEP</ion-label>
+      <ion-input type="text" [(ngModel)]="cep"></ion-input>
+    </ion-item>
+  
+  </ion-list>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button secondary (click)="buscarCEP()">Buscar</button>
 </ion-content>
