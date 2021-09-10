@@ -17,18 +17,10 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFirestoreModule } from "angularfire2/firestore";
 import { UserProvider } from '../providers/user/user';
 import { IonicStorageModule } from '@ionic/storage';
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDN_iE3i9gKM4bnjsb2l4JWVKBsf071Vl8",
-  authDomain: "escolaapp-65b44.firebaseapp.com",
-  projectId: "escolaapp-65b44",
-  storageBucket: "escolaapp-65b44.appspot.com",
-  messagingSenderId: "493637607395",
-  appId: "1:493637607395:web:9e36c125cea23bef8fcad6",
-  measurementId: "G-BDTQBTRJEG",
-  databaseURL: "https://escolaapp-65b44-default-rtdb.firebaseio.com/"
-};
+import { env } from '../env/env';
+import { AlunoProvider } from '../providers/aluno/aluno';
+import { ProfessorProvider } from '../providers/professor/professor';
+import { CursoProvider } from '../providers/curso/curso';
 
 @NgModule({
   declarations: [
@@ -42,7 +34,7 @@ const firebaseConfig = {
     IonicStorageModule.forRoot(),
     HttpClientModule,
 
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(env.prodution ? env.prod : env.dev),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -58,7 +50,10 @@ const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CepProvider,
-    UserProvider
+    UserProvider,
+    AlunoProvider,
+    ProfessorProvider,
+    CursoProvider
   ]
 })
 export class AppModule {}

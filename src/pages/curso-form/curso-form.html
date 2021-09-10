@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{titulo}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="item.nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>CH</ion-label>
+      <ion-input type="text" [(ngModel)]="item.ch"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Professor</ion-label>
+      <ion-input type="text" [(ngModel)]="item.professor"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Alunos</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+  
+  </ion-list>
+
+  <button ion-button block (click)="salvar()">Salvar</button>
+
+  <button ion-button block color="danger" (click)="excluir()" *ngIf="itemID !== undefined">Excluir</button>
+
+</ion-content>

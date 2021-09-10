@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{titulo}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="aluno.nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Telefone</ion-label>
+      <ion-input type="text" [(ngModel)]="aluno.telefone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Matrícula</ion-label>
+      <ion-input type="text" [(ngModel)]="aluno.matricula"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Cidade</ion-label>
+      <ion-input type="text" [(ngModel)]="aluno.cidade"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>UF</ion-label>
+      <ion-input type="text" [(ngModel)]="aluno.uf"></ion-input>
+    </ion-item>
+  
+  </ion-list>
+
+  <button ion-button block (click)="salvar()">Salvar</button>
+
+  <button ion-button block color="danger" (click)="excluir()" *ngIf="alunoID !== undefined">Excluir</button>
+
+</ion-content>

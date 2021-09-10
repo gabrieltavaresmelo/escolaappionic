@@ -12,11 +12,11 @@ import {Storage} from "@ionic/storage";
   templateUrl: 'app.html'
 })
 export class MyApp {
+
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'LoginPage';
-
-  pages: Array<{title: string, component: any}>;
+  rootPage : any = 'LoginPage';
+  pages : any[] = [];
 
   constructor(public platform: Platform, 
       public statusBar: StatusBar, 
@@ -28,7 +28,10 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Usuários', component: ListPage },
-      { title: 'Endereços', component: 'ListEnderecoPage' }
+      { title: 'Endereços', component: 'ListEnderecoPage' },
+      { title: 'Alunos', component: 'AlunoListPage' },
+      { title: 'Cursos', component: 'CursoListPage' },
+      { title: 'Professores', component: 'ProfessorListPage' },
     ];
 
   }
