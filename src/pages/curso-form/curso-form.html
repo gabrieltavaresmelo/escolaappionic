@@ -24,8 +24,10 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Alunos</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-label>Alunos</ion-label>
+      <ion-select [(ngModel)]="item.alunosArr" multiple="true" okText="Ok" cancelText="Cancelar">
+        <ion-option *ngFor="let aluno of alunos" value="{{aluno.key}}">{{aluno.value.nome}}</ion-option>
+      </ion-select>
     </ion-item>
   
   </ion-list>

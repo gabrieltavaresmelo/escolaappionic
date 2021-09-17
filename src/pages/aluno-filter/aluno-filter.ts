@@ -8,7 +8,13 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class AlunoFilterPage {
 
+  uf = '';
   cidade = '';
+
+  ufArr = [
+    'CE',
+    'PE',
+  ]
 
   cidadeArr = [
     'Fortaleza',
@@ -17,6 +23,7 @@ export class AlunoFilterPage {
     'Eusébio',
     'Canindé',
     'Cascavel',
+    'Recife'
   ];
 
   constructor(public navCtrl: NavController, 
@@ -31,6 +38,7 @@ export class AlunoFilterPage {
 
   filtrar() {
     const params = { 
+      uf: this.uf,
       cidade: this.cidade,
       isLimpar: false
     };
@@ -39,6 +47,7 @@ export class AlunoFilterPage {
 
   limpar() {
     const params = { 
+      uf: this.uf,
       cidade: this.cidade,
       isLimpar: true
     };

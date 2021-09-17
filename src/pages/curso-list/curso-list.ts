@@ -16,7 +16,7 @@ export class CursoListPage {
     public cursoProvider: CursoProvider
     ) {
 
-      this.cursoProvider.listar().subscribe(_data => {
+      this.cursoProvider.listarFS().subscribe(_data => {
         console.log(_data);
         this.itemArr = _data;
       })

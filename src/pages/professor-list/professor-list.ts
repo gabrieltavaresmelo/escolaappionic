@@ -16,7 +16,7 @@ export class ProfessorListPage {
     public professorProvider: ProfessorProvider
     ) {
 
-      this.professorProvider.listar().subscribe(_data => {
+      this.professorProvider.listarFS().subscribe(_data => {
         console.log(_data);
         this.itemArr = _data;
       })

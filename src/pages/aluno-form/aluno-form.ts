@@ -50,13 +50,22 @@ export class AlunoFormPage {
 
     if(this.alunoID) { // atualizar
 
-      this.alunoProvider.atualizar(this.alunoID, this.aluno).then(_ => {
+      // this.alunoProvider.atualizar(this.alunoID, this.aluno).then(_ => {
+      //   this.presentToast('Aluno atualizado com sucesso!');
+      // });
+
+      this.alunoProvider.atualizarFS(this.alunoID, this.aluno).then(_ => {
         this.presentToast('Aluno atualizado com sucesso!');
       })
 
     } else { // inserir
 
-      this.alunoProvider.inserir(this.aluno).then(_ => {
+      // this.alunoProvider.inserir(this.aluno).then(_ => {
+      //   this.presentToast('Aluno inserido com sucesso!');
+      //   this.navCtrl.pop();
+      // });
+
+      this.alunoProvider.inserirFS(this.aluno).then(_ => {
         this.presentToast('Aluno inserido com sucesso!');
         this.navCtrl.pop();
       });
@@ -79,7 +88,15 @@ export class AlunoFormPage {
           text: 'Excluir',
           handler: () => {
             
-            this.alunoProvider.remover(this.alunoID)
+            // this.alunoProvider.remover(this.alunoID)
+            //   .then(_ => {
+            //     console.log('ok')
+            //   })
+            //   .catch(error => {
+            //     console.log('error', error);
+            //   });
+
+            this.alunoProvider.removerFS(this.alunoID)
               .then(_ => {
                 console.log('ok')
               })

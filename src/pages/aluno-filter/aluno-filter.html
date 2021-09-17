@@ -16,6 +16,12 @@
 
   <ion-list>
     <ion-item>
+      <ion-label>UF</ion-label>
+      <ion-select [(ngModel)]="uf" okText="Ok" cancelText="Cancelar">
+        <ion-option *ngFor="let item of ufArr" value="{{item}}">{{item}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label>Cidade</ion-label>
       <ion-select [(ngModel)]="cidade" okText="Ok" cancelText="Cancelar">
         <ion-option *ngFor="let item of cidadeArr" value="{{item}}">{{item}}</ion-option>
