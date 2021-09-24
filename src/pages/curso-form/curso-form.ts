@@ -58,6 +58,9 @@ export class CursoFormPage {
   salvar() {
     console.log(this.item);
 
+    this.item.lat = parseFloat(this.item.lat + '');
+    this.item.lng = parseFloat(this.item.lng + '');
+
     if(this.itemID) { // atualizar
 
       this.cursoProvider.atualizarFS(this.itemID, this.item).then(_ => {

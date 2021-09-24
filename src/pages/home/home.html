@@ -3,22 +3,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Cursos Disponíveis</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+
+  <ion-grid class="mapa-grid">
+    <div #map id="map"></div>
+  </ion-grid>
   
-  <ion-list>
-
-    <ion-item>
-      <ion-label stacked>CEP</ion-label>
-      <ion-input type="text" [(ngModel)]="cep"></ion-input>
-    </ion-item>
-  
-  </ion-list>
-
-  <button ion-button secondary (click)="buscarCEP()">Buscar</button>
-
-  <a href="https://firebasestorage.googleapis.com/v0/b/escolaapp-59267.appspot.com/o/app-debug.apk?alt=media&token=abb63438-4f07-4411-b404-0345222d790b"> Download APK</a>
 </ion-content>

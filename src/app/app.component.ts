@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 import {Storage} from "@ionic/storage";
+import { UserProvider } from '../providers/user/user';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,17 +22,21 @@ export class MyApp {
   constructor(public platform: Platform, 
       public statusBar: StatusBar, 
       public splashScreen: SplashScreen,
-      public storage: Storage
+      public storage: Storage,
+      public userProvider: UserProvider,
       ) {
     this.initializeApp();
 
     this.pages = [
       { title: 'Home', component: HomePage },
+      { title: 'Configurações', component: 'ConfiguracoesPage' },
       { title: 'Usuários', component: ListPage },
       { title: 'Endereços', component: 'ListEnderecoPage' },
       { title: 'Alunos', component: 'AlunoListPage' },
       { title: 'Cursos', component: 'CursoListPage' },
       { title: 'Professores', component: 'ProfessorListPage' },
+      { title: 'Sobre', component: 'SobrePage' },
+      { title: 'Sobre', component: 'SobrePage' },
     ];
 
   }
@@ -42,7 +47,7 @@ export class MyApp {
       this.splashScreen.hide();
 
 
-      this.storage.get('usuario').then(_usuario => {
+      this.userProvider.lerLocal().then(_usuario => {
         console.log('AP COMPONENT', _usuario);
 
         if(_usuario && _usuario.length > 0) {
@@ -61,7 +66,7 @@ export class MyApp {
   }
 
   logout() {
-    this.storage.remove('usuario').then(_data => {
+    this.userProvider.removeLocal().then(_data => {
       this.nav.setRoot('LoginPage');
     });
   }

@@ -15,12 +15,15 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFirestoreModule } from "angularfire2/firestore";
+import { AngularFireStorageModule } from "angularfire2/storage";
+
 import { UserProvider } from '../providers/user/user';
 import { IonicStorageModule } from '@ionic/storage';
 import { env } from '../env/env';
 import { AlunoProvider } from '../providers/aluno/aluno';
 import { ProfessorProvider } from '../providers/professor/professor';
 import { CursoProvider } from '../providers/curso/curso';
+import { FirebaseStorageProvider } from '../providers/firebase-storage/firebase-storage';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { CursoProvider } from '../providers/curso/curso';
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,7 +57,8 @@ import { CursoProvider } from '../providers/curso/curso';
     UserProvider,
     AlunoProvider,
     ProfessorProvider,
-    CursoProvider
+    CursoProvider,
+    FirebaseStorageProvider
   ]
 })
 export class AppModule {}
