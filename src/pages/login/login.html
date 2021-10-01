@@ -1,31 +1,50 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Login</ion-title>
+  <ion-navbar transparent>
+    <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="conteudo">
 
-  <ion-list>
+  <ion-grid class="grid-logo">
+    <ion-row align-items-center justify-content-center>
+      <ion-col col-12 align-self-center>
+        <img src="../../assets/imgs/logo.png" />        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-    <ion-item>
-      <ion-label stacked>Email</ion-label>
-      <ion-input type="text" [(ngModel)]="email"></ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label stacked>Senha</ion-label>
-      <ion-input type="password" [(ngModel)]="senha"></ion-input>
-    </ion-item>
+  <ion-grid class="grid-list">
+    <ion-row align-items-center justify-content-center>
+      <ion-col align-self-center col-12 col-lg-4 col-xl-4>
 
-    <button ion-button block color="vinho" (click)="entrar()">Entrar</button>
-  
+        <ion-list class="conteudo-input">
+    
+          <ion-item class="margem-input-top">
+            <ion-input type="text" [(ngModel)]="email" placeholder="E-mail"></ion-input>
+          </ion-item>
+        
+          <ion-item class="margem-input-top">
+            <ion-input type="password" [(ngModel)]="senha" placeholder="Senha"></ion-input>
+          </ion-item>
+      
+          <button ion-button block color="vinho" (click)="entrar()" class="margem-btn-top btn">Entrar</button>
+        
+      
+          <button class="btn-link margem-btnlink-top" ion-button block color="primary" clear (click)="esqueciSenha()">Recuperar senha? Clique aqui</button>
+      
+        </ion-list>
 
-    <button ion-button block color="primary" outline (click)="cadastro()">Cadastro</button>
-
-    <button ion-button block color="primary" outline (click)="esqueciSenha()">Esqueci a senha</button>
-
-
-  </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar transparent>
+    <ion-title>
+      <button class="btn-link" ion-button block color="primary" clear (click)="cadastro()">Não possui conta? Cadastre-se</button>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -24,6 +24,7 @@ import { AlunoProvider } from '../providers/aluno/aluno';
 import { ProfessorProvider } from '../providers/professor/professor';
 import { CursoProvider } from '../providers/curso/curso';
 import { FirebaseStorageProvider } from '../providers/firebase-storage/firebase-storage';
+import { ExportProvider } from '../providers/export/export';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { FirebaseStorageProvider } from '../providers/firebase-storage/firebase-
     AlunoProvider,
     ProfessorProvider,
     CursoProvider,
-    FirebaseStorageProvider
+    FirebaseStorageProvider,
+    ExportProvider
   ]
 })
 export class AppModule {}

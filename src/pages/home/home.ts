@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CepProvider } from '../../providers/cep/cep';
 import { CursoProvider } from '../../providers/curso/curso';
+import { ExportProvider } from '../../providers/export/export';
 import { UserProvider } from '../../providers/user/user';
 
 
@@ -16,10 +17,13 @@ export class HomePage {
   @ViewChild('map') mapElement: ElementRef; // endereco da minha div no html
   map; // objeto mapa do google
 
+  cursosArr = [];
+
   constructor(
       public navCtrl: NavController,
       public userProvider: UserProvider,
-      public cursoProvider: CursoProvider
+      public cursoProvider: CursoProvider,
+      public exportProvider: ExportProvider,
     ) {
 
   }
@@ -35,6 +39,7 @@ export class HomePage {
 
     this.cursoProvider.listarFS().subscribe(_data => {
       console.log('cursos', _data);
+      this.cursosArr = _data;
 
       for (let i = 0; i < _data.length; i++) {
         const element = _data[i];
@@ -112,6 +117,45 @@ export class HomePage {
     return new google.maps.InfoWindow({
       content: contentHtml
     })
+  }
+
+  gerarCSV() {
+    this.exportProvider.gerarCSV(this.exportarDados(), 'cursos');
+  }
+
+  gerarExcel() {
+    // console.log('jsonArr', jsonArr);
+    this.exportProvider.gerarExcel(this.exportarDados(), 'cursos');
+  }
+
+  gerarPDF() {
+    this.exportProvider.gerarPDF(this.exportarDados(), 'cursos');
+  }
+
+  private exportarDados() {
+    let jsonArr = [];
+
+    for (let i = 0; i < this.cursosArr.length; i++) {
+      const element = this.cursosArr[i];
+      
+      const key = element.key;
+      const value = element.value;
+
+      let _item = {
+        'carga horaria': value.ch,
+        'latitude': value.lat,
+        'longitude': value.lng,
+        'local': value.local,
+        'curso': value.nome,
+        'professor': value.professor,
+        'qtd alunos': value.alunosArr ? value.alunosArr.length : 0,
+        'link': 'https://www.google.com/maps/?q=' + value.lat + ',' + value.lng,
+      };
+
+      jsonArr.push(_item);
+    }
+
+    return jsonArr;
   }
 
 }

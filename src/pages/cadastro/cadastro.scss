@@ -1,3 +1,62 @@
 page-cadastro {
 
+    ion-header {
+        .toolbar-title {
+            color: white;
+        }
+
+        .back-button {
+            color: white;
+        }
+    }
+
+    .conteudo {
+        background: url('../../assets/imgs/bg.jpg') no-repeat center center/cover transparent;
+        
+        .grid-logo {
+            ion-col {
+                text-align: center;
+            }
+    
+            img {
+                width: 110px;
+            }
+        }
+    
+        .conteudo-input {
+    
+            ion-item {
+                border-radius: 30px;
+                background-color: rgba(255, 255, 255, 0.3) !important;
+    
+                ion-input {
+                    color: white;
+                }
+    
+                ::placeholder {
+                    color: #ddd;
+                }
+            }
+    
+        }
+    
+        .margem-input-top {
+            margin-top: 20px;
+        }
+    
+        .margem-btn-top {
+            margin-top: 30px;
+        }
+    
+        .margem-btnlink-top {
+            margin-top: 10px;
+        }
+    
+        .btn {
+            background-color: #fa9600;
+            border-radius: 30px;
+            text-transform: capitalize;
+        }
+    }
+
 }
