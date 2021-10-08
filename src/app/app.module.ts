@@ -25,6 +25,8 @@ import { ProfessorProvider } from '../providers/professor/professor';
 import { CursoProvider } from '../providers/curso/curso';
 import { FirebaseStorageProvider } from '../providers/firebase-storage/firebase-storage';
 import { ExportProvider } from '../providers/export/export';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { ExportProvider } from '../providers/export/export';
     ProfessorProvider,
     CursoProvider,
     FirebaseStorageProvider,
-    ExportProvider
+    ExportProvider,
+    Geolocation,
+    Camera
   ]
 })
 export class AppModule {}

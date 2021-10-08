@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation';
 import { NavController } from 'ionic-angular';
 import { CepProvider } from '../../providers/cep/cep';
 import { CursoProvider } from '../../providers/curso/curso';
@@ -18,12 +19,14 @@ export class HomePage {
   map; // objeto mapa do google
 
   cursosArr = [];
+  makerMe: any;
 
   constructor(
       public navCtrl: NavController,
       public userProvider: UserProvider,
       public cursoProvider: CursoProvider,
       public exportProvider: ExportProvider,
+      private geolocation: Geolocation
     ) {
 
   }
@@ -57,7 +60,31 @@ export class HomePage {
         
         this.carregaDadosMapa(itemMarker);
       }
-    })
+    });
+
+    this.atualizarLocalizacao();
+  }
+
+  atualizarLocalizacao() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      // resp.coords.latitude
+      // resp.coords.longitude
+
+      console.log('GPS**');
+      console.log('lat: ', resp.coords.latitude);
+      console.log('lng: ', resp.coords.longitude);
+
+      if(this.makerMe) {
+        this.makerMe.setMap(null); // remove o marcador do mapa
+        this.makerMe = undefined;
+      }
+
+      this.makerMe = this.addMarkerMe(resp.coords.latitude, resp.coords.longitude, 'me');
+      this.makerMe.setMap(this.map); // adiciona o marcador no mapa
+
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
   }
 
   carregaDadosMapa(itemMarker) {
@@ -105,6 +132,16 @@ export class HomePage {
       title: nome,
       icon: new google.maps.MarkerImage(
         'https://mt.google.com/vt/icon?psize=16&font=fonts/Roboto-Regular.ttf&color=ff330000&name=icons/spotlight/spotlight-waypoint-a.png&ax=44&ay=48&scale=1&text=' + abrev
+      )
+    })
+  }
+
+  addMarkerMe(_lat, _lng, nome) {
+    return new google.maps.Marker({
+      position: {lat: _lat, lng: _lng},
+      title: nome,
+      icon: new google.maps.MarkerImage(
+        'assets/icon/location_icon.png'
       )
     })
   }

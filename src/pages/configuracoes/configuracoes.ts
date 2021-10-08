@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, IonicPage, LoadingController, NavController, NavParams, Platform } from 'ionic-angular';
 import { User } from '../../models/user';
 import { FirebaseStorageProvider } from '../../providers/firebase-storage/firebase-storage';
 import { UserProvider } from '../../providers/user/user';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -20,7 +21,10 @@ export class ConfiguracoesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public userProvider: UserProvider,
     public firebaseStorageProvider: FirebaseStorageProvider,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private camera: Camera,
+    public platform: Platform,
+    public actionSheetCtrl: ActionSheetController
     ) {
   }
 
@@ -51,6 +55,97 @@ export class ConfiguracoesPage {
   }
 
   escolherFoto() {
+    const isMobile = this.platform.is('cordova');
+    console.log('mobile', isMobile);
+    
+    if(isMobile) {
+      this.abrirCelular();
+    } else {
+      this.abrirArquivos();
+    }
+  }
+
+  abrirCelular() {
+
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'Selecione',
+      buttons: [
+        {
+          text: 'Câmera',
+          role: 'destructive',
+          handler: () => {
+            this.abrirCamera();
+          }
+        },{
+          text: 'Galeria',
+          handler: () => {
+            this.abrirGaleria();
+          }
+        },{
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  private abrirCamera() {
+    const options: CameraOptions = {
+      quality: 50,
+      // destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      allowEdit: false,
+      targetHeight: 350,
+      targetWidth: 350,
+      
+      // CAMERA
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      saveToPhotoAlbum: true,
+      cameraDirection: this.camera.Direction.FRONT,
+      correctOrientation: true,
+    }
+
+    this.carregarImagem(options);
+  }
+
+  private abrirGaleria() {
+    const options: CameraOptions = {
+      quality: 50,
+      // destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      allowEdit: false,
+      targetHeight: 350,
+      targetWidth: 350,
+      
+      // GALERIA
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      correctOrientation: true,
+    }
+
+    this.carregarImagem(options);
+  }
+
+  private carregarImagem(options) {
+    this.camera.getPicture(options).then((imageData) => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      console.log('base64', base64Image)
+
+      this.foto = base64Image;
+      this.isUploaded = true;
+
+     }, (err) => {
+      // Handle error
+     });
+  }
+  
+  abrirArquivos() {
     this.fileUserPhoto.nativeElement.click();
   }
 
